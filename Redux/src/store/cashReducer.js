@@ -14,3 +14,4 @@ export const cashReducer = (state = defaultState, action) => {
             return state
     }
 }
+export default cashReducer;

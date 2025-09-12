@@ -1,11 +1,13 @@
-import {createStore,combineReducers} from "redux";
-import {cashReducer} from "./cashReducer.js";
-import {customReducer} from "./customerReducer.js";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import cashReducer from "./cashReducer";
+import customReducer from "./customerReducer";
 
 const rootReducer = combineReducers({
-    cash:cashReducer,
-    customers: customReducer
-})
+    cash: cashReducer,
+    customers: customReducer,
+});
 
-export const store = createStore(rootReducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
-
+export const store = configureStore({
+    reducer: rootReducer,
+    devTools: true,
+});
