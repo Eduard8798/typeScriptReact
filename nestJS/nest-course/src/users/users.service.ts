@@ -3,6 +3,7 @@ import {User} from "./users.model";
 import {InjectModel} from "@nestjs/sequelize";
 import {CreateUserDto} from "./dto/create-user.dto";
 import {RolesService} from "../roles/roles.service";
+import {where} from "sequelize";
 
 @Injectable()
 export class UsersService {
@@ -14,11 +15,24 @@ export class UsersService {
 
     async createUser(dto: CreateUserDto){
         const user = await this.userRepository.create(dto);
+        const role = await this.roleService.getRoleByValue('USER');
+        console.log('role:', role);
+
+        if (role) {
+            await user.$set('roles', [role.id]);
+        } else {
+            throw new Error('Role USER not found');
+        }
         return user;
     }
 
     async getAllUsers() {
-        const users = await this.userRepository.findAll();
+        const users = await this.userRepository.findAll({include: {all: true}});
         return users;
+    }
+
+    async getUserByEmail(email:string){
+        const user = await this.userRepository.findOne({where:{email},include:{all:true}})
+        return user;
     }
 }

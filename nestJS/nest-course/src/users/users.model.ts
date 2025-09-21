@@ -15,16 +15,17 @@ export class User extends Model <User,UserCreationAttrs > {
 declare id: number;
     @ApiProperty({example: 'user@gmail.com' , description: 'email'})
     @Column({type: DataType.STRING, unique: true, allowNull:false})
-     email: string;
+    declare  email: string;
     @ApiProperty({example: '123456' , description: 'password user'})
     @Column({type: DataType.STRING, allowNull:false})
-    password: string;
+    declare  password: string;
     @ApiProperty({example: 'true' , description: 'banned on not'})
     @Column({type: DataType.BOOLEAN, defaultValue: false})
-    banned: boolean;
+    declare  banned: boolean;
     @ApiProperty({example: 'simple banned' , description: 'text banned'})
-    @Column({type: DataType.BOOLEAN, allowNull:true})
-    banReason: boolean;
+    @Column({type: DataType.STRING, allowNull:true})
+    declare   banReason: string;
+
 
     @BelongsToMany(() => Role, () => UserRoles)
     roles: Role[];

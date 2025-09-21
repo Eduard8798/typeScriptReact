@@ -15,10 +15,10 @@ export class Role extends Model <Role, RoleCreationAttrs> {
     declare id: number;
     @ApiProperty({example: 'ADMIN', description: 'unique value role user'})
     @Column({type: DataType.STRING, unique: true, allowNull: false})
-    value: string;
+    declare value: string;
     @ApiProperty({example: 'Admin', description: 'description roles'})
     @Column({type: DataType.STRING, allowNull: false})
-    description: string;
+    declare description: string;
 
     @BelongsToMany(()=> User,()=> UserRoles)
     users: User[];

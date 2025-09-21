@@ -8,6 +8,7 @@ import { RolesService } from './roles/roles.service';
 import { RolesModule } from './roles/roles.module';
 import {Role} from "./roles/roles.model";
 import {UserRoles} from "./roles/userRoles.model";
+import { AuthModule } from './auth/auth.module';
 
 
 
@@ -16,8 +17,7 @@ import {UserRoles} from "./roles/userRoles.model";
 
 
 @Module({
-// controllers: [RolesController],
-//     providers:[RolesService],
+
     imports: [
         ConfigModule.forRoot({
            envFilePath:`.${process.env.NODE_ENV}.env`,
@@ -34,6 +34,7 @@ import {UserRoles} from "./roles/userRoles.model";
         }),
         UsersModule,
         RolesModule,
+        AuthModule,
     ],
 })
 export class AppModule{}
